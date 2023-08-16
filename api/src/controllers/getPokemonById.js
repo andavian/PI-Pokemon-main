@@ -4,6 +4,7 @@ const { Pokemon } = require("../db");
 const URL_BASE = "https://pokeapi.co/api/v2/pokemon/";
 
 const getPokemonById = async (req, res) => {
+  console.log(req.params);
   try {
     const { id } = req.params;
     //peticion a la base de datos

@@ -9,11 +9,12 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+
+router.get("/pokemons/search", getPokemonByName);
+
 router.get("/pokemons", getPokemons);
 
 router.get("/pokemons/:id", getPokemonById);
-
-router.get("/pokemons/name", getPokemonByName);
 
 router.post("/pokemons", (req, res) => {
   const pokemon = req.body;
