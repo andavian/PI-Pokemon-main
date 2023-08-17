@@ -10,7 +10,7 @@ const getPokemons = async (req, res) => {
   try {
     const fetchPokemon = async (id) => {
       const response = await axios.get(`${URL_BASE}${id}`);
-      //console.log("data", response.data);
+      
       return response.data;
     };
 

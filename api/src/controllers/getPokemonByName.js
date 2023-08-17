@@ -3,11 +3,8 @@ const { Op } = require("sequelize");
 const { Pokemon } = require("../db");
 
 const URL_BASE = "https://pokeapi.co/api/v2/pokemon/";
-console.log("el codigo se esta ejecutando");
-console.log(URL_BASE);
 
 const getPokemonByName = async (req, res) => {
-  console.log(req.query);
   const charName = req.query.charName;
 
   const apiPokemons = 100;
@@ -16,7 +13,7 @@ const getPokemonByName = async (req, res) => {
   try {
     const fetchPokemon = async (id) => {
       const response = await axios.get(`${URL_BASE}${id}`);
-      //console.log("data", response.data);
+
       return response.data;
     };
 
@@ -45,19 +42,18 @@ const getPokemonByName = async (req, res) => {
       };
     });
 
-    const nameFinding = mapPokemons.filter((character) =>
-      character.name.toLowerCase().includes(charName.toLowerCase())
+    const nameFinding = mapPokemons.filter(
+      (character) => character.name.toLowerCase() === charName.toLowerCase()
     );
-
     //peticion a la base de datos
     const pokemonDB = await Pokemon.findAll({
       where: {
-        name: {
-          [Op.iLike]: `%${charName}%`, // Buscará cualquier coincidencia de parte del nombre
-        },
+        name: charName,
+        // {
+        //   [Op.iLike]: `%${charName}%`,
+        // },
       },
     });
-    console.log("BD", pokemonDB);
 
     const totalPokemons = pokemonDB.concat(nameFinding);
 
