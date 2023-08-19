@@ -1,0 +1,38 @@
+:root {
+  --primary-100: #ff0000;
+  --primary-200: #ff5a36;
+  --primary-300: #ffc993;
+  --accent-100: #ffffff;
+  --accent-200: #9b9b9b;
+  --text-100: #ffffff;
+  --text-200: #e0e0e0;
+  --bg-100: #000000;
+  --bg-200: #161616;
+  --bg-300: #2c2c2c;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-100);
+  padding: 15px;
+}
+
+.navbutton {
+  font-family: arial;
+  color: var(--text-100) !important;
+  font-size: 14px;
+  text-shadow: 1px 1px 0px var(--bg-100);
+  box-shadow: 1px 1px 1px var(--accent-100);
+  padding: 10px 25px;
+  border-radius: 10px;
+  border: 3px outset var(--accent-200);
+  background: var(--primary-200);
+  background: linear-gradient(to top, var(--primary-200), var(--primary-100));
+  cursor: pointer;
+}
+.navbutton:hover {
+  color: var(--accent-200) !important;
+  background: var(--bg-300);
+}

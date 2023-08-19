@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container2 {
+  width: 82px;
+  height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+}
+
+.img {
+  height: 100%;
+
+  position: relative;
+}
+
+.btn {
+  width: 82px;
+  height: 82px;
+  border: none;
+  background-color: transparent;
+  color: white;
+  border-radius: 50%;
+  position: absolute;
+  cursor: pointer;
+}
+
+.btn:hover {
+  justify-content: center;
+  background-color: black;
+  color: white;
+  box-shadow: inset 0px 0px 5px 5px #c1c1c1;
+  font-size: 1.5em;
+}
+
+.link {
+  position: absolute;
+  top: 1px;
+  left: 2px;
+}

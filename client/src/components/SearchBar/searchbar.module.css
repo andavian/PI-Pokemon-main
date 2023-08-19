@@ -1,0 +1,54 @@
+:root {
+  --primary-100: #ff0000;
+  --primary-200: #ff5a36;
+  --primary-300: #ffc993;
+  --accent-100: #ffffff;
+  --accent-200: #9b9b9b;
+  --text-100: #ffffff;
+  --text-200: #e0e0e0;
+  --bg-100: #000000;
+  --bg-200: #161616;
+  --bg-300: #2c2c2c;
+}
+
+.inputGroup {
+  display: flex;
+  width: 25%;
+  align-items: center;
+  position: relative;
+  padding: 0.5rem;
+}
+
+.input {
+  min-height: 50px;
+  min-width: 200px;
+  padding: 0 1rem;
+  color: var(--text-100);
+  font-size: 15px;
+  border: 1px solid var(--primary-100);
+  border-radius: 6px 0 0 6px;
+  background-color: transparent;
+}
+
+.buttonSearch {
+  min-height: 50px;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0px 6px 6px 0px;
+  background-color: var(--primary-100);
+  color: var(--text-100);
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  position: relative;
+}
+
+.buttonSearch:hover {
+  background-color: var(--primary-200);
+}
+
+.input:focus,
+.input:focus-visible {
+  border-color: var(--primary-200);
+  outline: none;
+}
