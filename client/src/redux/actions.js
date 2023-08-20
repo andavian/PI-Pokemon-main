@@ -6,7 +6,8 @@ const endpoint = "pokemons";
 export const getPokemons = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(endpoint);
+      const { data } = await axios.get(endpoint);
+
       return dispatch({
         type: GET_POKEMON,
         payload: data,

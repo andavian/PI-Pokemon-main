@@ -1,8 +1,8 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import { getPokemon, getPokemons } from "../../redux/actions";
+import { getPokemons } from "../../redux/actions";
+import Card from "../../components/Card/Card";
 
 // async function onSearchByName(charName) {
 //   try {
@@ -23,6 +23,7 @@ import { getPokemon, getPokemons } from "../../redux/actions";
 const Home = () => {
   const dispatch = useDispatch();
   const pokemons = useSelector((state) => state.allPokemons);
+  console.log("state", pokemons);
 
   useEffect(() => {
     dispatch(getPokemons());
@@ -33,10 +34,7 @@ const Home = () => {
       <SearchBar />
       <section>
         {pokemons.map((pokemon) => (
-          <li key={pokemon.id}>
-            {pokemon.image}
-            {pokemon.name}
-          </li>
+          <Card key={pokemon.id} pokemon={pokemon} />
         ))}
       </section>
     </div>

@@ -1,7 +1,6 @@
 import { GET_POKEMON } from "./actions";
 
 const initialState = {
-  myPokemons: [],
   allPokemons: [],
 };
 
@@ -10,8 +9,8 @@ export default function rootReducer(state = initialState, action) {
     case GET_POKEMON:
       return {
         ...state,
-        myFavorites: action.payload,
-        allCharacters: action.payload,
+
+        allPokemons: action.payload,
       };
 
     default:

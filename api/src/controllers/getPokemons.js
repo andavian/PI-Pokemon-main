@@ -4,13 +4,13 @@ const { Pokemon } = require("../db");
 const URL_BASE = "https://pokeapi.co/api/v2/pokemon/";
 
 const getPokemons = async (req, res) => {
-  const apiPokemons = 10;
+  const apiPokemons = 12;
   const pokemons = [];
 
   try {
     const fetchPokemon = async (id) => {
       const response = await axios.get(`${URL_BASE}${id}`);
-      
+
       return response.data;
     };
 
@@ -25,17 +25,22 @@ const getPokemons = async (req, res) => {
     });
 
     const mapPokemons = pokemons.map((pokemon) => {
-      const { id, name, sprites, stats, height, weight } = pokemon;
+      const { id, name, sprites, stats, height, weight, types } = pokemon;
       return {
         id,
         name,
-        image: sprites.other.dream_world.front_default,
+        image: sprites.other.home.front_default,
+        image2: sprites.other.dream_world.front_default,
         hp: stats[0].base_stat,
         attack: stats[1].base_stat,
         defense: stats[2].base_stat,
         speed: stats[5].base_stat,
         height,
         weight,
+        types: types.map((item) => {
+          const { name } = item.type;
+          return name;
+        }),
       };
     });
 
