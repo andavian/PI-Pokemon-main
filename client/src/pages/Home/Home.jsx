@@ -1,40 +1,33 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import { getPokemons } from "../../redux/actions";
+import { getPokemons, getTypes } from "../../redux/actions";
 import Card from "../../components/Card/Card";
-
-// async function onSearchByName(charName) {
-//   try {
-//     const { data } = await axios(
-//       `pokemons/search?charName=${encodeURIComponent(charName)}`
-//     );
-
-//     if (!data.charName) {
-//       alert("¡No se encontró el pokemon!");
-//     } else {
-//       setPokemons((characters) => [...characters, ...data]);
-//     }
-//   } catch (error) {
-//     alert(error.response.data.error);
-//   }
-// }
+import styles from "./home.module.css";
+import PokemonTypes from "../../components/PokemonTypes/PokemonTypes";
 
 const Home = () => {
   const dispatch = useDispatch();
   const pokemons = useSelector((state) => state.allPokemons);
+  const pokemonTypes = useSelector((state) => state.pokemonTypes);
   console.log("state", pokemons);
 
   useEffect(() => {
     dispatch(getPokemons());
+    dispatch(getTypes());
   }, [dispatch]);
 
   return (
     <div>
       <SearchBar />
-      <section>
+      <section className={styles.sectionCards}>
         {pokemons.map((pokemon) => (
-          <Card key={pokemon.id} pokemon={pokemon} />
+          <Card
+            className={styles.item}
+            key={pokemon.id}
+            pokemon={pokemon}
+            types={pokemonTypes}
+          />
         ))}
       </section>
     </div>

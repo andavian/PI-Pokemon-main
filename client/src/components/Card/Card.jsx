@@ -1,9 +1,12 @@
-const Card = ({ pokemon }) => {
+import PokemonTypes from "../PokemonTypes/PokemonTypes";
+import styles from "./card.module.css";
+
+const Card = ({ pokemon, types }) => {
   return (
-    <article className="product">
+    <article className={styles.container}>
       <img src={pokemon.image} alt={pokemon.name} width="100" />
-      <h2>{pokemon.name}</h2>
-      <p>{pokemon.types}</p>
+      <h2>{pokemon.name.toUpperCase()}</h2>
+      <PokemonTypes pokemon={pokemon} types={types} />
     </article>
   );
 };
