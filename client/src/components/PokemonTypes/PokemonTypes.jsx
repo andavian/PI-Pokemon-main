@@ -15,7 +15,7 @@ const PokemonTypes = ({ pokemon, types }) => {
               key={index}
               src={image}
               alt={pokemon.types[index]}
-              width="40"
+              width="30"
             />
           )
       )}

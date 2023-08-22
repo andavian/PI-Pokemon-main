@@ -2,6 +2,8 @@ import axios from "axios";
 
 export const GET_POKEMON = "GET_POKEMON";
 export const GET_TYPES = "GET_TYPES";
+export const FILTER_TYPE = "FILTER_TYPE";
+export const ORDER = "ORDER";
 
 const endpoints = ["pokemons", "types"];
 
@@ -33,3 +35,17 @@ export const getTypes = () => {
     }
   };
 };
+
+export function filterCards(type) {
+  return {
+    type: FILTER_TYPE,
+    payload: type,
+  };
+}
+
+export function orderCards(order) {
+  return {
+    type: ORDER,
+    payload: order,
+  };
+}
