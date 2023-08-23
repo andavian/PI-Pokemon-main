@@ -4,6 +4,7 @@ export const GET_POKEMON = "GET_POKEMON";
 export const GET_TYPES = "GET_TYPES";
 export const FILTER_TYPE = "FILTER_TYPE";
 export const ORDER = "ORDER";
+export const FILTER_ID = "FILTER_ID";
 
 const endpoints = ["pokemons", "types"];
 
@@ -36,10 +37,17 @@ export const getTypes = () => {
   };
 };
 
-export function filterCards(type) {
+export function filterCardsByType(type) {
   return {
     type: FILTER_TYPE,
     payload: type,
+  };
+}
+
+export function filterCardsById(id) {
+  return {
+    type: FILTER_ID,
+    payload: id,
   };
 }
 

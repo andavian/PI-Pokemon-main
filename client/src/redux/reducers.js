@@ -1,4 +1,10 @@
-import { GET_POKEMON, GET_TYPES, ORDER, FILTER_TYPE } from "./actions";
+import {
+  GET_POKEMON,
+  GET_TYPES,
+  ORDER,
+  FILTER_TYPE,
+  FILTER_ID,
+} from "./actions";
 
 const initialState = {
   allPokemons: [],
@@ -27,26 +33,66 @@ export default function rootReducer(state = initialState, action) {
         return {
           ...state,
           myPokemons: state.allPokemons.filter((pokemon) =>
-            pokemon.type.includes(action.payload)
+            pokemon.types.includes(action.payload)
+          ),
+        };
+      }
+
+    case FILTER_ID:
+      if (action.payload === "All") {
+        return { ...state, myPokemons: state.allPokemons };
+      } else if (
+        typeof action.payload === "string" &&
+        action.payload.length === 36
+      ) {
+        return {
+          ...state,
+          myPokemons: state.allPokemons.filter(
+            (pokemon) => pokemon.id === action.payload
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          myPokemons: state.allPokemons.filter(
+            (pokemon) => pokemon.id === action.payload
           ),
         };
       }
 
     case ORDER:
-      if (action.payload === "A") {
-        return {
-          ...state,
-          myPokemons: [...state.allPokemons].sort((a, b) => a.id - b.id),
-        };
-      } else if (action.payload === "D") {
-        return {
-          ...state,
-          myPokemons: [...state.allPokemons].sort((a, b) => b.id - a.id),
-        };
-      } else {
-        return {
-          ...state,
-        };
+      switch (action.payload) {
+        case "A":
+          return {
+            ...state,
+            myPokemons: [...state.allPokemons].sort((a, b) => a.id - b.id),
+          };
+
+        case "D":
+          return {
+            ...state,
+            myPokemons: [...state.allPokemons].sort((a, b) => b.id - a.id),
+          };
+
+        case "LA":
+          return {
+            ...state,
+            myPokemons: [...state.allPokemons].sort(
+              (a, b) => a.attack - b.attack
+            ),
+          };
+
+        case "HA":
+          return {
+            ...state,
+            myPokemons: [...state.allPokemons].sort(
+              (a, b) => b.attack - a.attack
+            ),
+          };
+        default:
+          return {
+            ...state,
+          };
       }
 
     default:
