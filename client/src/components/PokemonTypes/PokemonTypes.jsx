@@ -1,6 +1,6 @@
 const PokemonTypes = ({ pokemon, types }) => {
-  const listImage = pokemon.types.map((typeName) => {
-    const findType = types.find((stateType) => stateType.name === typeName);
+  const listImage = pokemon.types.map((typeObj) => {
+    const findType = types.find((stateType) => stateType.name === typeObj.name);
 
     if (findType) return findType.image;
     return null;

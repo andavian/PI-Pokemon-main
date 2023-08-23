@@ -4,9 +4,14 @@ import {
   ORDER,
   FILTER_TYPE,
   FILTER_ID,
+  SET_CURRENT_PAGE,
+ 
 } from "./actions";
 
 const initialState = {
+  currentPage: 1,
+  itemsPerPage: 12,
+  totalItems: 0,
   allPokemons: [],
   myPokemons: [],
   pokemonTypes: [],
@@ -33,31 +38,32 @@ export default function rootReducer(state = initialState, action) {
         return {
           ...state,
           myPokemons: state.allPokemons.filter((pokemon) =>
-            pokemon.types.includes(action.payload)
+            pokemon.types.find((type) => type.name === action.payload)
           ),
         };
       }
 
     case FILTER_ID:
-      if (action.payload === "All") {
-        return { ...state, myPokemons: state.allPokemons };
-      } else if (
-        typeof action.payload === "string" &&
-        action.payload.length === 36
-      ) {
-        return {
-          ...state,
-          myPokemons: state.allPokemons.filter(
-            (pokemon) => pokemon.id === action.payload
-          ),
-        };
-      } else {
-        return {
-          ...state,
-          myPokemons: state.allPokemons.filter(
-            (pokemon) => pokemon.id === action.payload
-          ),
-        };
+      switch (action.payload) {
+        case "All":
+          return { ...state, myPokemons: state.allPokemons };
+        case "Database":
+          return {
+            ...state,
+            myPokemons: state.allPokemons.filter(
+              (pokemon) =>
+                typeof pokemon.id === "string" && pokemon.id.length === 36
+            ),
+          };
+        case "API":
+          return {
+            ...state,
+            myPokemons: state.allPokemons.filter(
+              (pokemon) => pokemon.id.length !== 36
+            ),
+          };
+        default:
+          return { ...state };
       }
 
     case ORDER:
@@ -94,6 +100,9 @@ export default function rootReducer(state = initialState, action) {
             ...state,
           };
       }
+
+    case SET_CURRENT_PAGE:
+      return { ...state, currentPage: action.payload };
 
     default:
       return { ...state };

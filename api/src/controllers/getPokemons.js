@@ -1,10 +1,10 @@
 const axios = require("axios");
-const { Pokemon } = require("../db");
+const { Pokemon, Type } = require("../db");
 
 const URL_BASE = "https://pokeapi.co/api/v2/pokemon/";
 
 const getPokemons = async (req, res) => {
-  const apiPokemons = 12;
+  const apiPokemons = 120;
   const pokemons = [];
 
   try {
@@ -39,12 +39,20 @@ const getPokemons = async (req, res) => {
         weight,
         types: types.map((item) => {
           const { name } = item.type;
-          return name;
+          return { name };
         }),
       };
     });
 
-    const pokemonsDB = await Pokemon.findAll(); //peticion a la base de datos
+    const pokemonsDB = await Pokemon.findAll({
+      include: {
+        model: Type,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
+      },
+    }); //peticion a la base de datos
 
     const totalPokemons = pokemonsDB.concat(mapPokemons);
 

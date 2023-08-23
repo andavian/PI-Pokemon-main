@@ -5,6 +5,7 @@ export const GET_TYPES = "GET_TYPES";
 export const FILTER_TYPE = "FILTER_TYPE";
 export const ORDER = "ORDER";
 export const FILTER_ID = "FILTER_ID";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 
 const endpoints = ["pokemons", "types"];
 
@@ -57,3 +58,8 @@ export function orderCards(order) {
     payload: order,
   };
 }
+
+export const setCurrentPage = (page) => ({
+  type: SET_CURRENT_PAGE,
+  payload: page,
+});

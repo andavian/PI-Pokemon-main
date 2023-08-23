@@ -4,16 +4,31 @@ import {
   filterCardsById,
   filterCardsByType,
   orderCards,
+  setCurrentPage,
 } from "../../redux/actions";
 import Card from "../Card/Card";
 import styles from "./cards.module.css";
+import LateralBar from "../LateralBar/LateralBar";
 
 const Cards = () => {
   const [aux, setAux] = useState(false);
   const dispatch = useDispatch();
-  const allPokemons = useSelector((state) => state.allPokemons);
-  const myPokemons = useSelector((state) => state.myPokemons);
-  const pokemonTypes = useSelector((state) => state.pokemonTypes);
+  const { allPokemons, myPokemons, pokemonTypes, currentPage, itemsPerPage } =
+    useSelector((state) => state);
+
+  const handlePageChange = (newPage) => {
+    dispatch(setCurrentPage(newPage));
+  };
+
+  const paginatedItems = allPokemons.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const paginatedFilter = myPokemons.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   const handleOrder = (event) => {
     dispatch(orderCards(event.target.value));
@@ -30,29 +45,13 @@ const Cards = () => {
     setAux(true);
   };
 
-  function capitalizeFirstLetter(str) {
-    return str.charAt(0).toLocaleUpperCase() + str.slice(1);
-  }
-  const typesNames = pokemonTypes.map((type) => (
-    <option key={type.id} value={type.name}>
-      <img
-        src={
-          //capitalizeFirstLetter(type.name)
-          type.image
-        }
-        alt={type.name}
-        width="40"
-      />
-    </option>
-  ));
-
-  const listAllPokemons = allPokemons.map((pokemon) => (
+  const listAllPokemons = paginatedItems.map((pokemon) => (
     <li className={styles.item} key={pokemon.id}>
       <Card pokemon={pokemon} types={pokemonTypes} />
     </li>
   ));
 
-  const listMyPokemons = myPokemons.map((pokemon) => (
+  const listMyPokemons = paginatedFilter.map((pokemon) => (
     <li className={styles.item} key={pokemon.id}>
       <Card pokemon={pokemon} types={pokemonTypes} />
     </li>
@@ -60,36 +59,32 @@ const Cards = () => {
 
   return (
     <>
-      <section>
-        <span>Filter by Type</span>
-        <button onClick={() => handleFilterByType("All")}>All</button>
-        {typesNames.map((type) => (
-          <button
-            key={type.props.value}
-            title={type.props.value}
-            onClick={() => handleFilterByType(type.props.value)}
-          >
-            {type.props.children}
-          </button>
-        ))}
-        <span>Filter by Origin</span>
-        <select onChange={handleFilterById} className={styles.input}>
-          <option value="All">All</option>
-          <option value="xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx">Database</option>
-          <option value="API">API REST</option>
-        </select>
-        <span>Order by</span>
-        <select onChange={handleOrder}>
-          <option value="A">Ascendente</option>
-          <option value="D">Descendente</option>
-          <option value="HA">Highest Attack</option>
-          <option value="LA">Lowest Attack</option>
-        </select>
-      </section>
-
+      <LateralBar
+        types={pokemonTypes}
+        handleFilterById={handleFilterById}
+        handleFilterByType={handleFilterByType}
+        handleOrder={handleOrder}
+        handlePageChange={handlePageChange}
+      />
       <ul className={styles.unorderedList}>
         {!aux ? [listAllPokemons] : [listMyPokemons]}
       </ul>
+      <button
+        onClick={() => handlePageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+      >
+        Anterior
+      </button>
+      <button
+        onClick={() => handlePageChange(currentPage + 1)}
+        disabled={
+          myPokemons.length !== 0
+            ? currentPage === Math.ceil(myPokemons.length / itemsPerPage)
+            : currentPage === Math.ceil(allPokemons.length / itemsPerPage)
+        }
+      >
+        Siguiente
+      </button>
     </>
   );
 };

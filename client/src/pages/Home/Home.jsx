@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { getPokemons, getTypes } from "../../redux/actions";
 import Cards from "../../components/Cards/Cards";
