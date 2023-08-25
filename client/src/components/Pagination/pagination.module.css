@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+}
+
+.pageNumbers {
+  list-style: none;
+  display: flex;
+}
+
+.number {
+  padding: 12px;
+  color: white;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.active {
+  padding: 12px;
+  background-color: white;
+  border: 1px solid white;
+  color: black;
+}

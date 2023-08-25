@@ -9,6 +9,7 @@ import {
 import Card from "../Card/Card";
 import styles from "./cards.module.css";
 import LateralBar from "../LateralBar/LateralBar";
+import Pagination from "../Pagination/Pagination";
 
 const Cards = () => {
   const [aux, setAux] = useState(false);
@@ -67,24 +68,9 @@ const Cards = () => {
         handlePageChange={handlePageChange}
       />
       <ul className={styles.unorderedList}>
-        {!aux ? [listAllPokemons] : [listMyPokemons]}
+        {!aux ? listAllPokemons : listMyPokemons}
       </ul>
-      <button
-        onClick={() => handlePageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-      >
-        Anterior
-      </button>
-      <button
-        onClick={() => handlePageChange(currentPage + 1)}
-        disabled={
-          myPokemons.length !== 0
-            ? currentPage === Math.ceil(myPokemons.length / itemsPerPage)
-            : currentPage === Math.ceil(allPokemons.length / itemsPerPage)
-        }
-      >
-        Siguiente
-      </button>
+      <Pagination handlePageChange={handlePageChange} />
     </>
   );
 };

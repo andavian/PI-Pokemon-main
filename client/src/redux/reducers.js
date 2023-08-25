@@ -5,7 +5,6 @@ import {
   FILTER_TYPE,
   FILTER_ID,
   SET_CURRENT_PAGE,
- 
 } from "./actions";
 
 const initialState = {
@@ -71,19 +70,24 @@ export default function rootReducer(state = initialState, action) {
         case "A":
           return {
             ...state,
-            myPokemons: [...state.allPokemons].sort((a, b) => a.id - b.id),
+            allPokemons: [...state.allPokemons].sort((a, b) => a.id - b.id),
+            myPokemons: [...state.myPokemons].sort((a, b) => a.id - b.id),
           };
 
         case "D":
           return {
             ...state,
-            myPokemons: [...state.allPokemons].sort((a, b) => b.id - a.id),
+            allPokemons: [...state.allPokemons].sort((a, b) => b.id - a.id),
+            myPokemons: [...state.myPokemons].sort((a, b) => b.id - a.id),
           };
 
         case "LA":
           return {
             ...state,
-            myPokemons: [...state.allPokemons].sort(
+            allPokemons: [...state.allPokemons].sort(
+              (a, b) => a.attack - b.attack
+            ),
+            myPokemons: [...state.myPokemons].sort(
               (a, b) => a.attack - b.attack
             ),
           };
@@ -91,7 +95,10 @@ export default function rootReducer(state = initialState, action) {
         case "HA":
           return {
             ...state,
-            myPokemons: [...state.allPokemons].sort(
+            allPokemons: [...state.allPokemons].sort(
+              (a, b) => b.attack - a.attack
+            ),
+            myPokemons: [...state.myPokemons].sort(
               (a, b) => b.attack - a.attack
             ),
           };
