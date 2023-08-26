@@ -6,8 +6,9 @@ export const FILTER_TYPE = "FILTER_TYPE";
 export const ORDER = "ORDER";
 export const FILTER_ID = "FILTER_ID";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 
-const endpoints = ["pokemons", "types"];
+const endpoints = ["pokemons", "types", "pokemons/search?charName="];
 
 export const getPokemons = () => {
   return async (dispatch) => {
@@ -37,6 +38,23 @@ export const getTypes = () => {
     }
   };
 };
+
+export function searchPokemonByName(charName) {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(
+        `${endpoints[2]}${encodeURIComponent(charName)}`
+      );
+
+      return dispatch({
+        type: SEARCH_BY_NAME,
+        payload: data,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
 
 export function filterCardsByType(type) {
   return {

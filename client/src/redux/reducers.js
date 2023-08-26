@@ -5,6 +5,7 @@ import {
   FILTER_TYPE,
   FILTER_ID,
   SET_CURRENT_PAGE,
+  SEARCH_BY_NAME,
 } from "./actions";
 
 const initialState = {
@@ -28,6 +29,13 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         pokemonTypes: action.payload,
+      };
+
+    case SEARCH_BY_NAME:
+      return {
+        ...state,
+
+        allPokemons: action.payload,
       };
 
     case FILTER_TYPE:

@@ -1,13 +1,13 @@
 const axios = require("axios");
 const { Op } = require("sequelize");
-const { Pokemon } = require("../db");
+const { Pokemon, Type } = require("../db");
 
 const URL_BASE = "https://pokeapi.co/api/v2/pokemon/";
 
 const getPokemonByName = async (req, res) => {
   const charName = req.query.charName;
 
-  const apiPokemons = 100;
+  const apiPokemons = 100; //649;
   const pokemons = [];
 
   try {
@@ -28,31 +28,42 @@ const getPokemonByName = async (req, res) => {
     });
 
     const mapPokemons = pokemons.map((pokemon) => {
-      const { id, name, sprites, stats, height, weight } = pokemon;
+      const { id, name, sprites, stats, height, weight, types } = pokemon;
       return {
         id,
         name,
-        image: sprites.other.dream_world.front_default,
+        image: sprites.other.home.front_default,
+        image2: sprites.other.dream_world.front_default,
         hp: stats[0].base_stat,
         attack: stats[1].base_stat,
         defense: stats[2].base_stat,
         speed: stats[5].base_stat,
         height,
         weight,
+        types: types.map((item) => {
+          const { name } = item.type;
+          return { name };
+        }),
       };
     });
 
-    const nameFinding = mapPokemons.filter(
-      (character) => character.name.toLowerCase() === charName.toLowerCase()
+    const nameFinding = mapPokemons.filter((character) =>
+      character.name.toLowerCase().includes(charName.toLowerCase())
     );
     //peticion a la base de datos
     const pokemonDB = await Pokemon.findAll({
       where: {
-        name: charName,
-        // {
-        //   [Op.iLike]: `%${charName}%`,
-        // },
+        //name: charName,
+
+        [Op.iLike]: `%${charName}%`,
       },
+      // include: {
+      //   model: Type,
+      //   attributes: ["name"],
+      //   through: {
+      //     attributes: [],
+      //   },
+      // },
     });
 
     const totalPokemons = pokemonDB.concat(nameFinding);

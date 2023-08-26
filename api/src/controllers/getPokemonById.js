@@ -1,10 +1,9 @@
 const axios = require("axios");
-const { Pokemon } = require("../db");
+const { Pokemon, Type } = require("../db");
 
 const URL_BASE = "https://pokeapi.co/api/v2/pokemon/";
 
 const getPokemonById = async (req, res) => {
-  console.log(req.params);
   try {
     const { id } = req.params;
     //peticion a la base de datos
@@ -12,6 +11,13 @@ const getPokemonById = async (req, res) => {
       const pokemonDB = await Pokemon.findOne({
         where: {
           id: id,
+        },
+        include: {
+          model: Type,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
         },
       });
 
@@ -23,7 +29,7 @@ const getPokemonById = async (req, res) => {
     //peticion a la API externa
     const { data } = await axios.get(`${URL_BASE}${id}`);
 
-    const { name, sprites, stats, height, weight } = data;
+    const { name, sprites, stats, height, weight, types } = data;
 
     const pokemon = {
       id,
@@ -35,6 +41,10 @@ const getPokemonById = async (req, res) => {
       speed: stats[5].base_stat,
       height,
       weight,
+      types: types.map((item) => {
+        const { name } = item.type;
+        return { name };
+      }),
     };
 
     return pokemon.name
