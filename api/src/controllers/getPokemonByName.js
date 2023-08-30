@@ -54,16 +54,17 @@ const getPokemonByName = async (req, res) => {
     const pokemonDB = await Pokemon.findAll({
       where: {
         //name: charName,
-
-        [Op.iLike]: `%${charName}%`,
+        name: {
+          [Op.iLike]: `%${charName}%`,
+        },
       },
-      // include: {
-      //   model: Type,
-      //   attributes: ["name"],
-      //   through: {
-      //     attributes: [],
-      //   },
-      // },
+      include: {
+        model: Type,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
+      },
     });
 
     const totalPokemons = pokemonDB.concat(nameFinding);
