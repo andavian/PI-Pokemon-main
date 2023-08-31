@@ -4,7 +4,7 @@ const { Pokemon, Type } = require("../db");
 const URL_BASE = "https://pokeapi.co/api/v2/pokemon/";
 
 const getPokemons = async (req, res) => {
-  const apiPokemons = 120;
+  const apiPokemons = 640;
   const pokemons = [];
 
   try {

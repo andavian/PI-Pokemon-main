@@ -7,6 +7,7 @@ export const ORDER = "ORDER";
 export const FILTER_ID = "FILTER_ID";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
+export const POKEMON_ERROR = "POKEMON_ERROR";
 
 const endpoints = ["pokemons", "types", "pokemons/search?charName="];
 
@@ -20,7 +21,10 @@ export const getPokemons = () => {
         payload: data,
       });
     } catch (error) {
-      alert(error.message);
+      dispatch({
+        type: POKEMON_ERROR,
+        payload: error.message,
+      });
     }
   };
 };
@@ -34,7 +38,10 @@ export const getTypes = () => {
         payload: data,
       });
     } catch (error) {
-      alert(error.message);
+      dispatch({
+        type: POKEMON_ERROR,
+        payload: error.message,
+      });
     }
   };
 };
@@ -51,7 +58,10 @@ export function searchPokemonByName(charName) {
         payload: data,
       });
     } catch (error) {
-      alert(error.message);
+      dispatch({
+        type: POKEMON_ERROR,
+        payload: error.message,
+      });
     }
   };
 }
