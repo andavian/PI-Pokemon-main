@@ -8,11 +8,12 @@ import {
 } from "../../redux/actions";
 import Card from "../Card/Card";
 import styles from "./cards.module.css";
-import LateralBar from "../LateralBar/LateralBar";
+import SideBar from "../SideBar/SideBar";
 import Pagination from "../Pagination/Pagination";
 
 const Cards = () => {
   const [aux, setAux] = useState(false);
+
   const dispatch = useDispatch();
   const { allPokemons, myPokemons, pokemonTypes, currentPage, itemsPerPage } =
     useSelector((state) => state);
@@ -41,8 +42,9 @@ const Cards = () => {
     setAux(true);
   };
 
-  const handleFilterByType = (value) => {
-    dispatch(filterCardsByType(value));
+  const handleFilterByType = (type) => {
+    dispatch(filterCardsByType(type));
+    handlePageChange(1);
     setAux(true);
   };
 
@@ -60,12 +62,10 @@ const Cards = () => {
 
   return (
     <>
-      <LateralBar
-        types={pokemonTypes}
+      <SideBar
         handleFilterById={handleFilterById}
         handleFilterByType={handleFilterByType}
         handleOrder={handleOrder}
-        handlePageChange={handlePageChange}
       />
       <ul className={styles.unorderedList}>
         {!aux ? listAllPokemons : listMyPokemons}

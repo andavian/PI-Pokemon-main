@@ -6,7 +6,8 @@ import {
   FILTER_ID,
   SET_CURRENT_PAGE,
   SEARCH_BY_NAME,
-} from "./actions";
+  POKEMON_ERROR,
+} from "./actionTypes";
 
 const initialState = {
   currentPage: 1,
@@ -15,6 +16,7 @@ const initialState = {
   allPokemons: [],
   myPokemons: [],
   pokemonTypes: [],
+  pokemonError: null,
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -35,7 +37,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
 
-        allPokemons: action.payload,
+        myPokemons: action.payload,
       };
 
     case FILTER_TYPE:
@@ -118,6 +120,12 @@ export default function rootReducer(state = initialState, action) {
 
     case SET_CURRENT_PAGE:
       return { ...state, currentPage: action.payload };
+
+    case POKEMON_ERROR:
+      return {
+        ...state,
+        pokemonError: action.payload, // Almacena el mensaje de error
+      };
 
     default:
       return { ...state };

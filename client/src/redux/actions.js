@@ -1,13 +1,5 @@
 import axios from "axios";
-
-export const GET_POKEMON = "GET_POKEMON";
-export const GET_TYPES = "GET_TYPES";
-export const FILTER_TYPE = "FILTER_TYPE";
-export const ORDER = "ORDER";
-export const FILTER_ID = "FILTER_ID";
-export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
-export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
-export const POKEMON_ERROR = "POKEMON_ERROR";
+import { GET_POKEMON, GET_TYPES, FILTER_TYPE, ORDER, FILTER_ID, SET_CURRENT_PAGE, SEARCH_BY_NAME, POKEMON_ERROR  } from "./actionTypes";
 
 const endpoints = ["pokemons", "types", "pokemons/search?charName="];
 

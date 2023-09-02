@@ -3,10 +3,11 @@ const { Pokemon } = require("../db");
 const postPokemon = async (req, res) => {
   const { name, image, hp, attack, defense, speed, height, weight, types } =
     req.body;
+  console.log("tipos", types);
 
   try {
     if (!name || !image || !hp || !attack || !defense || !types)
-      return res.status(401).json({ mesage: "Faltan datos" });
+      return res.status(401).json({ message: "faltan datos" });
 
     const [pokemon, created] = await Pokemon.findOrCreate({
       where: { name },
