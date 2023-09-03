@@ -38,36 +38,63 @@ const Pagination = ({ handlePageChange }) => {
       </li>
     );
   });
+
+  const renderFilteredPagesNumbers = filteredPages.map((number) => {
+    return (
+      <li
+        key={number}
+        id={number}
+        className={
+          Number(currentPage) === number ? styles.active : styles.number
+        }
+        onClick={() => handleClick(number)}
+      >
+        {number}
+      </li>
+    );
+  });
+
   return (
     <div className={styles.container}>
-      {" "}
-      {currentPage === 1 ? (
+      <div>
+        <button
+          className={`${currentPage === 1 ? styles.none : styles.btn} ${
+            currentPage === 1 ? styles.none : styles.btnStart
+          }`}
+          onClick={() => {
+            handlePageChange(1);
+          }}
+        >
+          &lt;&lt;&lt;
+        </button>
+        <button
+          className={`${currentPage === 1 ? styles.none : styles.btn}`}
+          onClick={() => handlePageChange(currentPage - 1)}
+        >
+          &lt;
+        </button>
+      </div>
+
+      <ul className={styles.pageNumbers}>
+        {filteredPages.lenght === 0
+          ? renderAllPagesNumbers
+          : renderFilteredPagesNumbers}
+      </ul>
+      {currentPage === maxPageMyPokemons ||
+      currentPage === maxPageAllPokemons ||
+      filteredPages.length === 0 ? (
         <></>
       ) : (
         <div>
           <button
-            onClick={() => {
-              handlePageChange(1);
-            }}
+            className={styles.btn}
+            onClick={() => handlePageChange(currentPage + 1)}
           >
-            &lt;&lt;&lt;
-          </button>
-          <button onClick={() => handlePageChange(currentPage - 1)}>
-            &lt;
-          </button>
-        </div>
-      )}
-      <ul className={styles.pageNumbers}>{renderAllPagesNumbers}</ul>
-      {currentPage === maxPageMyPokemons ||
-      currentPage === maxPageAllPokemons ? (
-        <></>
-      ) : (
-        <div>
-          <button onClick={() => handlePageChange(currentPage + 1)}>
             &gt;
           </button>
 
           <button
+            className={`${styles.btnEnd} ${styles.btn}`}
             onClick={() => {
               myPokemons.length !== 0
                 ? handlePageChange(maxPageMyPokemons)

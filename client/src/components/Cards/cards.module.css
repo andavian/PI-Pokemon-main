@@ -4,8 +4,10 @@
   grid-template-areas:
     "sidebar content"
     ". pagination";
-  gap: 20px; /* Espaciado entre columnas */
-  height: 100vh; /* Altura del contenedor al 100% de la ventana */
+  gap: 20px;
+  height: 100vh;
+  justify-content: center;
+  padding: 50px;
 }
 
 .sidebar {
@@ -18,6 +20,7 @@
   grid-area: pagination;
   background-color: #f0f0f0;
   padding: 10px;
+  justify-self: center;
 }
 
 .content {

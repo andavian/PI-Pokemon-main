@@ -1,22 +1,79 @@
+:root {
+  --primary-100: #ff0000;
+  --primary-200: #ff5a36;
+  --primary-300: #ffc993;
+  --accent-100: #ffffff;
+  --accent-200: #9b9b9b;
+  --text-100: #ffffff;
+  --text-200: #e0e0e0;
+  --bg-100: #000000;
+  --bg-200: #161616;
+  --bg-300: #2c2c2c;
+}
+
 .container {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .pageNumbers {
   list-style: none;
   display: flex;
+  padding-left: 0;
 }
 
 .number {
   padding: 12px;
   color: white;
-  border: 1px solid white;
+  border: 1px solid var(--primary-100);
   cursor: pointer;
 }
 
 .active {
-  padding: 12px;
-  background-color: white;
-  border: 1px solid white;
+  font-weight: bold;
+  padding: 14px;
+  background-color: var(--primary-300);
+  border: 2px solid var(--primary-300);
   color: black;
+  border-radius: 6px;
+  transform: scale(1.25);
+}
+
+.btn {
+  min-height: 53px;
+  padding: 0.5em 1em;
+  border: none;
+
+  background-color: var(--primary-100);
+  color: var(--text-100);
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  position: relative;
+}
+
+.btn:hover {
+  background-color: var(--primary-200);
+}
+
+.btnEnd {
+  border-radius: 0px 6px 6px 0px;
+}
+
+.btnEnd:hover {
+  background-color: var(--primary-200);
+}
+
+.btnStart {
+  border-radius: 6px 0px 0px 6px;
+}
+
+.btnStart:hover {
+  background-color: var(--primary-200);
+}
+
+.none {
+  display: none;
 }
