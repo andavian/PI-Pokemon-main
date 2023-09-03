@@ -69,5 +69,10 @@ export default function validateForm(pokemonData) {
     errors.weight = "Weight must be less than 10000";
   }
 
+  // Validación de selección de tipos
+  if (pokemonData.types.length > 2) {
+    errors.types = "Solo se pueden seleccionar hasta dos tipos.";
+  }
+
   return errors;
 }

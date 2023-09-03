@@ -3,7 +3,7 @@ const { Pokemon } = require("../db");
 const postPokemon = async (req, res) => {
   const { name, image, hp, attack, defense, speed, height, weight, types } =
     req.body;
-  console.log("tipos", types);
+  console.log("body", req.body);
 
   try {
     if (!name || !image || !hp || !attack || !defense || !types)

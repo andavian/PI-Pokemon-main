@@ -1,0 +1,15 @@
+.container {
+  color: white;
+}
+
+.input {
+  min-height: 30px;
+  min-width: 125px;
+  padding: 1rem;
+  margin: 2rem;
+  color: var(--text-100);
+  font-size: 15px;
+  border: 1px solid var(--accent-200);
+  border-radius: 6px;
+  background-color: var(--bg-200);
+}

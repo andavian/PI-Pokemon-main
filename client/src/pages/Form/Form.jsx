@@ -1,15 +1,13 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import validateForm from "./validation.js";
 import styles from "./form.module.css";
 import TypesButtons from "../../components/TypesButtons/TypesButtons.jsx";
 
 const Form = () => {
-  //const pokemonTypes = useSelector((state) => state.pokemonTypes);
-  const [selectedTypes, setSelectedTypes] = useState([
-    { name: "tipo1" },
-    { name: "tipo2" },
-  ]);
+  const pokemonTypes = useSelector((state) => state.pokemonTypes);
+  const [selectedTypes, setSelectedTypes] = useState([]);
   const [pokemonData, setPokemonData] = useState({
     name: "",
     image: "",
@@ -34,30 +32,32 @@ const Form = () => {
     );
   };
 
+  //Se crea un Objeto que matchee nombres de tipos con ids.
+  const mappingTypes = {};
+  let id = 1;
+
+  pokemonTypes.forEach((type) => {
+    mappingTypes[type.name] = id++;
+  });
+  console.log(mappingTypes);
+
   const toggleType = (type) => {
-    console.log("Tipo seleccionado:", type);
-    // Copia el arreglo de tipos actual
-    const updatedSelectedTypes = [...selectedTypes];
+    const typeId = mappingTypes[type];
+    console.log("id", typeId);
 
-    // Busca si el tipo ya está seleccionado
-    const index = updatedSelectedTypes.findIndex(
-      (selectedType) => selectedType.name === type
-    );
-
-    if (index !== -1) {
-      // Si el tipo ya está seleccionado, quítalo del arreglo
-      updatedSelectedTypes.splice(index, 1);
-    } else {
-      // Si el tipo no está seleccionado, agrégalo al arreglo
-      if (updatedSelectedTypes.length < 2) {
-        updatedSelectedTypes.push({ name: type });
+    if (typeId) {
+      // Verifica si la ID del tipo es válida
+      if (selectedTypes.includes(typeId)) {
+        // Si la ID ya está seleccionada, quítala del arreglo
+        setSelectedTypes(selectedTypes.filter((id) => id !== typeId));
+      } else {
+        // Si la ID no está seleccionada, agrégala al arreglo
+        setSelectedTypes([...selectedTypes, typeId]);
       }
     }
-
-    // Actualiza el estado con el arreglo de tipos actualizado
-    setSelectedTypes(updatedSelectedTypes);
   };
 
+  //Crear un pokemon
   async function create(pokemonData) {
     try {
       const URL = "pokemons";
@@ -72,7 +72,7 @@ const Form = () => {
     event.preventDefault();
     const updatedPokemonData = {
       ...pokemonData,
-      types: selectedTypes.map((typeObj) => ({ name: typeObj.name })),
+      types: selectedTypes,
     };
     await create(updatedPokemonData);
     setPokemonData({
@@ -86,7 +86,7 @@ const Form = () => {
       weight: null,
       types: [],
     });
-    setSelectedTypes([{ name: "" }, { name: "" }]);
+    setSelectedTypes([]);
   };
 
   return (
@@ -172,7 +172,7 @@ const Form = () => {
         <span>{errors.weight}</span>
         <h3>Select types</h3>
         <TypesButtons onClick={toggleType} />
-        <button>Submit</button>
+        {!errors ? <button>Submit</button> : <div></div>}
       </form>
     </div>
   );

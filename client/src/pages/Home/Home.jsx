@@ -14,10 +14,10 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <>
       <SearchBar />
       <Cards />
-    </div>
+    </>
   );
 };
 

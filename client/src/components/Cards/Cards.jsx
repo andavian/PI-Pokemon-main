@@ -61,17 +61,24 @@ const Cards = () => {
   ));
 
   return (
-    <>
+    <div className={styles.container}>
       <SideBar
+        className={styles.sidebar}
         handleFilterById={handleFilterById}
         handleFilterByType={handleFilterByType}
         handleOrder={handleOrder}
       />
-      <ul className={styles.unorderedList}>
-        {!aux ? listAllPokemons : listMyPokemons}
-      </ul>
-      <Pagination handlePageChange={handlePageChange} />
-    </>
+      <main>
+        <ul className={styles.content}>
+          {!aux ? listAllPokemons : listMyPokemons}
+        </ul>
+
+        <Pagination
+          className={styles.pagination}
+          handlePageChange={handlePageChange}
+        />
+      </main>
+    </div>
   );
 };
 

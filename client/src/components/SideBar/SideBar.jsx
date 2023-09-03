@@ -4,7 +4,7 @@ import styles from "./sideBar.module.css";
 const SideBar = ({ handleFilterById, handleFilterByType, handleOrder }) => {
   return (
     <>
-      <section>
+      <section className={styles.container}>
         <span>Filter by Type</span>
 
         <button onClick={() => handleFilterByType("All")}>All</button>
