@@ -5,23 +5,25 @@ const SideBar = ({ handleFilterById, handleFilterByType, handleOrder }) => {
   return (
     <>
       <section className={styles.container}>
-        <span>Filter by Type</span>
+        <div className={styles.oredering}>
+          <p className={styles.text}>Order by</p>
+          <select onChange={handleOrder} className={styles.order}>
+            <option value="A">Ascendant</option>
+            <option value="D">Descending</option>
+            <option value="HA">Highest Attack</option>
+            <option value="LA">Lowest Attack</option>
+          </select>
+        </div>
+        <hr />
+        <h2>Filter by Type</h2>
 
-        <button onClick={() => handleFilterByType("All")}>All</button>
         <TypesButtons onClick={handleFilterByType} />
-
-        <span>Filter by Origin</span>
+        <hr />
+        <h2>Filter by Origin</h2>
         <select onChange={handleFilterById} className={styles.input}>
           <option value="All">All</option>
           <option value="Database">Database</option>
           <option value="API">API REST</option>
-        </select>
-        <span>Order by</span>
-        <select onChange={handleOrder}>
-          <option value="A">Ascendente</option>
-          <option value="D">Descendente</option>
-          <option value="HA">Highest Attack</option>
-          <option value="LA">Lowest Attack</option>
         </select>
       </section>
     </>

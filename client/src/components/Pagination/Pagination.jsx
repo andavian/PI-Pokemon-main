@@ -5,54 +5,20 @@ const Pagination = ({ handlePageChange }) => {
   const { allPokemons, myPokemons, currentPage, itemsPerPage } = useSelector(
     (state) => state
   );
-  const handleClick = (pageNumber) => {
-    handlePageChange(pageNumber);
-  };
 
-  const maxPageAllPokemons = Math.ceil(allPokemons.length / itemsPerPage);
+  const isMyPokemonsActive = myPokemons.length !== 0;
+  const activeList = isMyPokemonsActive ? myPokemons : allPokemons;
+  const maxPage = Math.ceil(activeList.length / itemsPerPage);
 
-  const maxPageMyPokemons = Math.ceil(myPokemons.length / itemsPerPage);
-
-  const allPages = [];
-  const filteredPages = [];
-
-  for (let i = 1; i <= maxPageAllPokemons; i++) {
-    allPages.push(i);
-  }
-
-  for (let i = 1; i <= maxPageMyPokemons; i++) {
-    filteredPages.push(i);
-  }
-
-  const renderAllPagesNumbers = allPages.map((number) => {
-    return (
-      <li
-        key={number}
-        id={number}
-        className={
-          Number(currentPage) === number ? styles.active : styles.number
-        }
-        onClick={() => handleClick(number)}
-      >
-        {number}
-      </li>
-    );
-  });
-
-  const renderFilteredPagesNumbers = filteredPages.map((number) => {
-    return (
-      <li
-        key={number}
-        id={number}
-        className={
-          Number(currentPage) === number ? styles.active : styles.number
-        }
-        onClick={() => handleClick(number)}
-      >
-        {number}
-      </li>
-    );
-  });
+  const renderPageNumbers = Array.from({ length: maxPage }, (_, index) => (
+    <li
+      key={index + 1}
+      className={currentPage === index + 1 ? styles.active : styles.number}
+      onClick={() => handlePageChange(index + 1)}
+    >
+      {index + 1}
+    </li>
+  ));
 
   return (
     <div className={styles.container}>
@@ -61,9 +27,7 @@ const Pagination = ({ handlePageChange }) => {
           className={`${currentPage === 1 ? styles.none : styles.btn} ${
             currentPage === 1 ? styles.none : styles.btnStart
           }`}
-          onClick={() => {
-            handlePageChange(1);
-          }}
+          onClick={() => handlePageChange(1)}
         >
           &lt;&lt;&lt;
         </button>
@@ -75,16 +39,9 @@ const Pagination = ({ handlePageChange }) => {
         </button>
       </div>
 
-      <ul className={styles.pageNumbers}>
-        {filteredPages.lenght === 0
-          ? renderAllPagesNumbers
-          : renderFilteredPagesNumbers}
-      </ul>
-      {currentPage === maxPageMyPokemons ||
-      currentPage === maxPageAllPokemons ||
-      filteredPages.length === 0 ? (
-        <></>
-      ) : (
+      <ul className={styles.pageNumbers}>{renderPageNumbers}</ul>
+
+      {currentPage < maxPage && (
         <div>
           <button
             className={styles.btn}
@@ -95,11 +52,7 @@ const Pagination = ({ handlePageChange }) => {
 
           <button
             className={`${styles.btnEnd} ${styles.btn}`}
-            onClick={() => {
-              myPokemons.length !== 0
-                ? handlePageChange(maxPageMyPokemons)
-                : handlePageChange(maxPageAllPokemons);
-            }}
+            onClick={() => handlePageChange(maxPage)}
           >
             &gt;&gt;&gt;
           </button>

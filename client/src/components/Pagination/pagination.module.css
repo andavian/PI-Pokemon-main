@@ -26,7 +26,7 @@
 
 .number {
   padding: 12px;
-  color: white;
+  color: var(--text-100);
   border: 1px solid var(--primary-100);
   cursor: pointer;
 }

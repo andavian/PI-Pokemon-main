@@ -1,11 +1,13 @@
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 45px), 1fr));
-  gap: 1rem;
+  gap: 0.5rem;
+  margin-bottom: 20px;
 }
 
 .item {
-  border: 1px solid #ccc;
+  border: none;
   padding: 5px;
   background-color: transparent;
+  cursor: pointer;
 }

@@ -69,10 +69,13 @@ const Cards = () => {
         handleOrder={handleOrder}
       />
       <main>
+        <Pagination
+          className={styles.pagination}
+          handlePageChange={handlePageChange}
+        />
         <ul className={styles.content}>
           {!aux ? listAllPokemons : listMyPokemons}
         </ul>
-
         <Pagination
           className={styles.pagination}
           handlePageChange={handlePageChange}
