@@ -25,7 +25,8 @@
   list-style: none;
   justify-items: center;
   align-items: center;
-  padding-right: 50px;
+
+  margin-bottom: 100px;
 }
 
 .item {

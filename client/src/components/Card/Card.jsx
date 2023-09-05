@@ -22,10 +22,10 @@ const Card = ({ pokemon, types }) => {
           alt={pokemon.name}
           width="200"
         />
-        <div className={styles.type}>
-          <PokemonTypes pokemon={pokemon} types={types} />
-        </div>
       </article>
+      <div className={styles.type}>
+        <PokemonTypes pokemon={pokemon} types={types} />
+      </div>
     </Link>
   );
 };

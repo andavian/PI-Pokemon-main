@@ -1,7 +1,18 @@
 :root {
   --card-height: 300px;
   --card-width: calc(var(--card-height) / 1.5);
+  --primary-100: #ff0000;
+  --primary-200: #ff5a36;
+  --primary-300: #ffc993;
+  --accent-100: #ffffff;
+  --accent-200: hsl(0, 0%, 61%);
+  --text-100: #ffffff;
+  --text-200: #e0e0e0;
+  --bg-100: #000000;
+  --bg-200: #161616;
+  --bg-300: #2c2c2c;
 }
+
 * {
   box-sizing: border-box;
 }
@@ -33,9 +44,10 @@
 
 .card:hover .wrapper {
   transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
-  box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 35px 32px -8px rgba(255, 255, 255, 0.75);
+  -webkit-box-shadow: 2px 35px 32px -8px rgba(255, 255, 255, 0.75);
+  -moz-box-shadow: 2px 35px 32px -8px rgba(255, 255, 255, 0.75);
+  opacity: 0.3;
 }
 
 .wrapper::before,
@@ -54,8 +66,8 @@
   background-image: linear-gradient(
     to top,
     transparent 46%,
-    rgba(12, 13, 19, 0.5) 68%,
-    rgba(12, 13, 19) 97%
+    rgba(255, 255, 255, 0.5) 68%,
+    rgba(255, 255, 255) 97%
   );
 }
 .wrapper::after {
@@ -79,8 +91,11 @@
 }
 .title {
   text-decoration: none;
-  color: whitesmoke;
+  color: var(--primary-300);
   width: 100%;
+  background-color: rgba(44, 44, 44, 0.7);
+  border-radius: 5px;
+
   transition: transform 0.5s;
 }
 .card:hover .title {
@@ -105,7 +120,9 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  transition: transform 0.5s;
+
+  z-index: -5;
+  pointer-events: none;
 }
 
 .container {

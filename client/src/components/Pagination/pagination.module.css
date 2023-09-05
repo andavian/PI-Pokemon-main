@@ -11,11 +11,15 @@
   --bg-300: #2c2c2c;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  margin-top: 20px;
 }
 
 .pageNumbers {

@@ -30,6 +30,10 @@ const Detail = () => {
     return name;
   });
 
+  function capitalizeFirstLetter(str) {
+    return str.charAt(0).toLocaleUpperCase() + str.slice(1);
+  }
+
   if (!pokemon) {
     return (
       <div>
@@ -40,10 +44,18 @@ const Detail = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.texto}>
+      <div className={styles.card}>
         <h2>Id: {pokemon.id}</h2>
-        <h2>Name: {pokemon.name}</h2>
-        <img src={pokemon.image} alt={pokemon.name} />
+        <div className={styles.topSection}>
+          <img
+            className={styles.topSection}
+            src={pokemon.image}
+            alt={pokemon.name}
+          />
+        </div>
+
+        <h2 className={styles.title}>{capitalizeFirstLetter(pokemon.name)}</h2>
+
         <h3>HP: {pokemon.hp}</h3>
         <h3>Attack: {pokemon.attack}</h3>
         <h3>Defense: {pokemon.defense}</h3>

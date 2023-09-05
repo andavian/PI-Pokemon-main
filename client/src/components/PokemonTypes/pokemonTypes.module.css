@@ -1,0 +1,25 @@
+:root {
+  --card-height: 300px;
+  --card-width: calc(var(--card-height) / 1.5);
+  --primary-100: #ff0000;
+  --primary-200: #ff5a36;
+  --primary-300: #ffc993;
+  --accent-100: #ffffff;
+  --accent-200: #9b9b9b;
+  --text-100: #ffffff;
+  --text-200: #e0e0e0;
+  --bg-100: #000000;
+  --bg-200: #161616;
+  --bg-300: #2c2c2c;
+}
+
+.container {
+  height: var(--card-height);
+  width: var(--card-width);
+  position: absolute;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
