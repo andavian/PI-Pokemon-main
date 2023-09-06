@@ -1,5 +1,5 @@
 :root {
-  --card-heightD: 1000px;
+  --border-radius-size: 14px;
   --card-width: calc(var(--card-height) / 1.5);
   --primary-100: #ff0000;
   --primary-200: #ff5a36;
@@ -12,55 +12,118 @@
   --bg-200: #161616;
   --bg-300: #2c2c2c;
 }
-* {
+
+*,
+*:before,
+*:after {
   box-sizing: border-box;
 }
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
+
+.wrapper {
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+  &:focus {
+    outline: 0;
+  }
 }
 
-.cardDetail {
-  height: var(--card-heightD);
-  width: var(--card-width);
-  border: solid white;
-  border-radius: 20px;
-  background: var(--primary-100);
-  padding: 5px;
-  overflow: hidden;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 20px 0px;
-  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.card {
+  background: white;
+  width: 300px;
+  display: inline-block;
+  margin: auto;
+  border-radius: 19px;
+  position: relative;
+  text-align: center;
+  box-shadow: -1px 15px 30px -12px black;
+  z-index: 9999;
 }
 
-.card:hover {
-  transform: scale(1.05);
+.cardImage {
+  position: relative;
+  height: 230px;
+  margin-bottom: 25px;
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/archer-bg.jpg");
+  border-top-left-radius: var(--border-radius-size);
+  border-top-right-radius: var(--border-radius-size);
 }
 
-.topSection {
-  height: 150px;
-  border-radius: 50%;
+.cardImg {
+  width: 350px;
+  position: absolute;
+  top: -110px;
+  right: -20px;
+}
+
+.cardId {
+  position: relative;
+  font-size: 18px;
+  margin: 0;
+}
+
+.cardTypes {
   display: flex;
   flex-direction: column;
-  background: linear-gradient(
-    45deg,
-    var(--primary-200) 0%,
-    var(--primary-300) 100%
-  );
-  position: relative;
+  justify-content: space-evenly;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  background-color: var(--primary-300);
+  color: var(--primary-100);
 }
 
-.title {
-  display: block;
-  font-size: 2rem;
-  font-weight: bolder;
+.cardName {
+  font-size: 30px;
+  color: black;
+  font-weight: 900;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.cardStats {
   color: white;
-  text-align: center;
-  letter-spacing: 2px;
+  font-weight: 700;
+  border-bottom-left-radius: var(--border-radius-size);
+  border-bottom-right-radius: var(--border-radius-size);
+  background: var(--primary-100);
 }
 
-.image {
-  border: solid white;
-  border-radius: 50%;
+.oneThird {
+  width: 33%;
+  float: left;
+  padding: 20px 15px;
+  border-right: 1px solid #f92828f3;
+  border-bottom: 1px solid #f92828f3;
+}
+
+.stat {
+  position: relative;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.statValue {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.noBorder {
+  border-right: none;
+}
+
+.btn {
+  width: 100%;
+  border-bottom-left-radius: var(--border-radius-size);
+  border-bottom-right-radius: var(--border-radius-size);
+  background: transparent;
+  color: var(--text-100);
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--primary-200);
 }

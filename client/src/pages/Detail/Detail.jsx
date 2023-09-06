@@ -43,35 +43,59 @@ const Detail = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.wrapper}>
       <div className={styles.card}>
-        <h2>Id: {pokemon.id}</h2>
-        <div className={styles.topSection}>
+        <div className={styles.cardImage}>
           <img
-            className={styles.topSection}
+            className={styles.cardImg}
             src={pokemon.image}
             alt={pokemon.name}
           />
         </div>
+        <h2 className={styles.cardId}>Id {pokemon.id}</h2>
 
-        <h2 className={styles.title}>{capitalizeFirstLetter(pokemon.name)}</h2>
-
-        <h3>HP: {pokemon.hp}</h3>
-        <h3>Attack: {pokemon.attack}</h3>
-        <h3>Defense: {pokemon.defense}</h3>
-        <h3>Speed: {pokemon.speed}</h3>
-        <h3>Height: {pokemon.height}</h3>
-        <h3>Weight: {pokemon.weight}</h3>
-        <h3>Type:</h3>
-        <p>{typeName[0]}</p>
-        <p>{typeName[1]}</p>
-        <p>{typeName[2]}</p>
-        <Link to="/home">
+        <h2 className={styles.cardName}>
+          {capitalizeFirstLetter(pokemon.name)}
+        </h2>
+        <div className={styles.cardTypes}>
           {" "}
-          <button type="button" className={styles.flecha}>
-            🢀
-          </button>
-        </Link>
+          <span>{typeName[0]}</span>
+          <span>{typeName[1]}</span>
+          <span>{typeName[2]}</span>
+        </div>
+        <div className={styles.cardStats}>
+          <div className={styles.oneThird}>
+            <div className={styles.stats}>{pokemon.hp}</div>
+            <div className={styles.statValue}>HP</div>
+          </div>
+          <div className={styles.oneThird}>
+            <div className={styles.stats}>{pokemon.attack}</div>
+            <div className={styles.statValue}>Attack</div>
+          </div>
+          <div className={`${styles.oneThird} ${styles.noBorder}`}>
+            <div className={styles.stats}>{pokemon.defense}</div>
+            <div className={styles.statValue}>Defense</div>
+          </div>
+          <div className={styles.oneThird}>
+            <div className={styles.stats}>{pokemon.speed}</div>
+            <div className={styles.statValue}>Speed</div>
+          </div>
+          <div className={styles.oneThird}>
+            <div className={styles.stats}>{pokemon.height}</div>
+            <div className={styles.statValue}>Height</div>
+          </div>
+          <div className={`${styles.oneThird} ${styles.noBorder}`}>
+            <div className={styles.stats}>{pokemon.weight}</div>
+            <div className={styles.statValue}>Weight</div>
+          </div>
+
+          <Link to="/home">
+            {" "}
+            <button type="button" className={styles.btn}>
+              🢀
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );
