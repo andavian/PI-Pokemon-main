@@ -1,14 +1,17 @@
 const { Pokemon } = require("../db");
 
 const updatePokemon = async (req, res) => {
-  const { id } = req.params; // Obtén el ID del Pokémon de los parámetros de la ruta
+  const { name } = req.params; // Obtén el ID del Pokémon de los parámetros de la ruta
   const updatedData = req.body; // Obtén los datos actualizados del cuerpo de la solicitud
+  const nameData = updatedData.name;
+  const nameDataToLowerCase = nameData.toLowerCase();
+  updatedData.name = nameDataToLowerCase;
 
   try {
-    // Busca el Pokémon por su ID
+    // Busca el Pokémon por su nombre
     const pokemon = await Pokemon.findOne({
       where: {
-        id: id,
+        name: name.toLowerCase(),
       },
     });
 

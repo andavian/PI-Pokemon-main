@@ -5,13 +5,24 @@ const postPokemon = async (req, res) => {
     req.body;
   console.log("body", req.body);
 
+  const nameToLowerCase = name.toLowerCase();
+
   try {
     if (!name || !image || !hp || !attack || !defense || !types)
       return res.status(401).json({ message: "faltan datos" });
 
     const [pokemon, created] = await Pokemon.findOrCreate({
       where: { name },
-      defaults: { name, image, hp, attack, defense, speed, height, weight },
+      defaults: {
+        name: nameToLowerCase,
+        image,
+        hp,
+        attack,
+        defense,
+        speed,
+        height,
+        weight,
+      },
     });
 
     await pokemon.addTypes(types);

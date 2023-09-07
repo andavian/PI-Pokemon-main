@@ -20,6 +20,7 @@ const Form = () => {
     types: [],
   });
   const [errors, setErrors] = useState({});
+  const [check, setCheck] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -30,6 +31,10 @@ const Form = () => {
         [name]: value,
       })
     );
+  };
+
+  const handleCheck = () => {
+    !check ? setCheck(true) : setCheck(false);
   };
 
   //Se crea un Objeto que matchee nombres de tipos con ids.
@@ -68,13 +73,26 @@ const Form = () => {
     }
   }
 
+  //Modificar un pokemon
+  async function update(pokemonData) {
+    try {
+      const URL = `pokemons/${pokemonData.name}`;
+      await axios.put(URL, pokemonData);
+    } catch (error) {
+      console.error(error);
+      alert(error.response.data.message);
+    }
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const updatedPokemonData = {
       ...pokemonData,
       types: selectedTypes,
     };
-    await create(updatedPokemonData);
+    !check
+      ? await create(updatedPokemonData)
+      : await update(updatedPokemonData);
     setPokemonData({
       name: "",
       image: "",
@@ -92,6 +110,14 @@ const Form = () => {
   return (
     <div>
       <form onSubmit={handleSubmit} className={styles.container}>
+        <label className={styles.switch}>
+          <input
+            className={styles.inputCheck}
+            type="checkbox"
+            onClick={handleCheck}
+          />
+          <span className={styles.slider}></span>
+        </label>
         <label>Name</label>
         <input
           name="name"

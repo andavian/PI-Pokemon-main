@@ -1,6 +1,5 @@
 :root {
   --border-radius-size: 14px;
-  --card-width: calc(var(--card-height) / 1.5);
   --primary-100: #ff0000;
   --primary-200: #ff5a36;
   --primary-300: #ffc993;

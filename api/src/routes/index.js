@@ -24,7 +24,7 @@ router.post("/pokemons", postPokemon);
 
 router.get("/types", getTypes);
 
-router.put("/pokemons/:id", updatePokemon);
+router.put("/pokemons/:name", updatePokemon);
 
 router.delete("/pokemons/delete", deletePokemon);
 
