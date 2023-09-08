@@ -11,13 +11,90 @@
   --bg-200: #161616;
   --bg-300: #2c2c2c;
 }
-
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
 .container {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  width: 1000px;
+  justify-content: space-evenly;
   align-items: center;
-  color: white;
+  color: var(--text-100);
+  border: 2px solid var(--primary-100);
+  border-radius: var(--border-radius-size);
+  margin: 0 4rem;
+}
+
+.containerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 70px), 1fr));
+  gap: 20px;
+  max-width: 200px;
+  padding-left: 4rem;
+  margin: 3rem;
+}
+
+.checkboxLabel {
+  grid-column: span 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input {
+  min-height: 30px;
+  min-width: 125px;
+  padding: 1rem;
+
+  color: var(--text-100);
+  font-size: 15px;
+  border: 1px solid var(--primary-100);
+  border-radius: 6px;
+  background-color: var(--bg-200);
+}
+
+.smallInput {
+  max-width: max-content;
+  width: 80px;
+  min-height: 30px;
+  min-width: 20px;
+  padding: 1rem;
+  font-size: 12px;
+  color: var(--text-100);
+  border: 1px solid var(--primary-100);
+  border-radius: 6px;
+  background-color: var(--bg-200);
+}
+
+.input:focus,
+.input:focus-visible {
+  border-color: var(--primary-200);
+  outline: none;
+}
+
+.smallInput:focus,
+.smallInput:focus-visible {
+  border-color: var(--primary-200);
+  outline: none;
+}
+
+.inputLabel {
+  grid-column: span 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.typeLabel {
+  width: 322px;
+  height: 322px;
+  padding: 1rem;
+  border: 1px solid var(--primary-100);
+  border-radius: var(--border-radius-size);
+  margin-top: 60px;
+  background-color: var(--bg-200);
 }
 
 .switch {

@@ -12,7 +12,7 @@ const TypesButtons = ({ onClick }) => {
       title={type.name}
       onClick={() => onClick(type.name)}
     >
-      <img src={type.image} alt={type.name} width="40" />
+      <img src={type.image} alt={type.name} width="35" />
     </button>
   ));
   return <div className={styles.container}>{typesButton}</div>;

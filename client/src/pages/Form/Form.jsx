@@ -11,9 +11,9 @@ const Form = () => {
   const [pokemonData, setPokemonData] = useState({
     name: "",
     image: "",
-    hp: 0,
-    attack: 0,
-    defense: 0,
+    hp: null,
+    attack: null,
+    defense: null,
     speed: null,
     height: null,
     weight: null,
@@ -96,9 +96,9 @@ const Form = () => {
     setPokemonData({
       name: "",
       image: "",
-      hp: 0,
-      attack: 0,
-      defense: 0,
+      hp: null,
+      attack: null,
+      defense: null,
       speed: null,
       height: null,
       weight: null,
@@ -110,94 +110,111 @@ const Form = () => {
   return (
     <div>
       <form onSubmit={handleSubmit} className={styles.container}>
-        <label className={styles.switch}>
-          <input
-            className={styles.inputCheck}
-            type="checkbox"
-            onClick={handleCheck}
-          />
-          <span className={styles.slider}></span>
-        </label>
-        <label>Name</label>
-        <input
-          name="name"
-          type="text"
-          className={styles.input}
-          value={pokemonData.name}
-          onChange={handleChange}
-        />
-        <span>{errors.name}</span>
-        <label>Image</label>
-        <input
-          name="image"
-          type="text"
-          className={styles.input}
-          value={pokemonData.image}
-          onChange={handleChange}
-        />
-        <span>{errors.image}</span>
-        <label>HP</label>
-        <input
-          type="number"
-          min="0"
-          step="1"
-          name="hp"
-          className={styles.input}
-          value={pokemonData.hp}
-          onChange={handleChange}
-        />
-        <span>{errors.hp}</span>
-        <label>Attack</label>
-        <input
-          type="number"
-          min="0"
-          step="1"
-          name="attack"
-          className={styles.input}
-          value={pokemonData.attack}
-          onChange={handleChange}
-        />
-        <span>{errors.attack}</span>
-        <label>Defense</label>
-        <input
-          type="number"
-          min="0"
-          step="1"
-          name="defense"
-          className={styles.input}
-          value={pokemonData.defense}
-          onChange={handleChange}
-        />
-        <span>{errors.defense}</span>
-        <label>Speed</label>
-        <input
-          name="speed"
-          type="text"
-          className={styles.input}
-          value={pokemonData.speed}
-          onChange={handleChange}
-        />
-        <span>{errors.speed}</span>
-        <label>Height</label>
-        <input
-          name="height"
-          type="text"
-          className={styles.input}
-          value={pokemonData.height}
-          onChange={handleChange}
-        />
-        <span>{errors.height}</span>
-        <label>Weight</label>
-        <input
-          name="weight"
-          type="text"
-          className={styles.input}
-          value={pokemonData.weight}
-          onChange={handleChange}
-        />
-        <span>{errors.weight}</span>
-        <h3>Select types</h3>
-        <TypesButtons onClick={toggleType} />
+        <div className={styles.containerGrid}>
+          <div className={styles.checkboxLabel}>
+            <label className={styles.switch}>
+              <input
+                className={styles.inputCheck}
+                type="checkbox"
+                onClick={handleCheck}
+              />
+              <span className={styles.slider}></span>
+            </label>
+          </div>
+          <div className={styles.inputLabel}>
+            <input
+              name="name"
+              type="text"
+              placeholder="Name"
+              className={styles.input}
+              value={pokemonData.name}
+              onChange={handleChange}
+            />
+
+            <span>{errors.name}</span>
+          </div>
+          <div className={styles.inputLabel}>
+            <input
+              name="image"
+              type="text"
+              placeholder="image"
+              className={styles.input}
+              value={pokemonData.image}
+              onChange={handleChange}
+            />
+            <span>{errors.image}</span>
+          </div>
+          <div>
+            <input
+              type="text"
+              name="hp"
+              placeholder="HP"
+              className={styles.smallInput}
+              value={pokemonData.hp}
+              onChange={handleChange}
+            />
+            <span>{errors.hp}</span>
+          </div>
+          <div>
+            <input
+              type="text"
+              name="attack"
+              placeholder="Attack"
+              className={styles.smallInput}
+              value={pokemonData.attack}
+              onChange={handleChange}
+            />
+            <span>{errors.attack}</span>
+          </div>
+          <div>
+            <input
+              type="text"
+              name="defense"
+              placeholder="Defense"
+              className={styles.smallInput}
+              value={pokemonData.defense}
+              onChange={handleChange}
+            />
+            <span>{errors.defense}</span>
+          </div>
+          <div>
+            <input
+              name="speed"
+              type="text"
+              placeholder="Speed"
+              className={styles.smallInput}
+              value={pokemonData.speed}
+              onChange={handleChange}
+            />
+            <span>{errors.speed}</span>
+          </div>
+          <div>
+            <input
+              name="height"
+              type="text"
+              placeholder="Height"
+              className={styles.smallInput}
+              value={pokemonData.height}
+              onChange={handleChange}
+            />
+            <span>{errors.height}</span>
+          </div>
+          <div>
+            <input
+              name="weight"
+              type="text"
+              placeholder="Weight"
+              className={styles.smallInput}
+              value={pokemonData.weight}
+              onChange={handleChange}
+            />
+            <span>{errors.weight}</span>
+          </div>
+        </div>
+        <div className={styles.typeLabel}>
+          <h3>Select types</h3>
+          <TypesButtons onClick={toggleType} />
+        </div>
         {!errors ? <button>Submit</button> : <div></div>}
       </form>
     </div>
