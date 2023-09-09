@@ -14,11 +14,8 @@ const Navbar = () => {
         <img src={logo} alt="logo" width={200} />
       </Link>
       <div>
-        <Link to="/detail">
-          <button className={styles.navbutton}>DETAIL</button>
-        </Link>
         <Link to="/form">
-          <button className={styles.navbutton}>FORM</button>
+          <button className={styles.navbutton}>MANAGE</button>
         </Link>
       </div>
     </div>
