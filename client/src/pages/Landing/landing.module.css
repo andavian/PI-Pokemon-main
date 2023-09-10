@@ -17,6 +17,7 @@
   height: 100%;
 
   position: relative;
+  z-index: -999;
 }
 
 .btn {
@@ -42,4 +43,14 @@
   position: absolute;
   top: 1px;
   left: 2px;
+}
+
+.logo {
+  position: absolute;
+  top: -50px;
+}
+
+.text {
+  position: absolute;
+  bottom: 15px;
 }

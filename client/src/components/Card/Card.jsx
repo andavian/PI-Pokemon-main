@@ -8,7 +8,7 @@ function capitalizeFirstLetter(str) {
 
 const Card = ({ pokemon, types }) => {
   return (
-    <Link to={`/detail/${pokemon.id}`}>
+    <Link to={`/detail/${pokemon.id}`} className={styles.link}>
       <article className={styles.card}>
         <div className={styles.wrapper}>
           <img src={pokemon.image} alt={pokemon.name} width="200" />
@@ -20,7 +20,7 @@ const Card = ({ pokemon, types }) => {
           className={styles.character}
           src={pokemon.image2}
           alt={pokemon.name}
-          width="200"
+          width="10"
         />
       </article>
       <div className={styles.type}>

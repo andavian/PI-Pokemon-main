@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   filterCardsById,
@@ -12,11 +11,15 @@ import SideBar from "../SideBar/SideBar";
 import Pagination from "../Pagination/Pagination";
 
 const Cards = () => {
-  const [aux, setAux] = useState(false);
-
   const dispatch = useDispatch();
-  const { allPokemons, myPokemons, pokemonTypes, currentPage, itemsPerPage } =
-    useSelector((state) => state);
+  const {
+    allPokemons,
+    myPokemons,
+    pokemonTypes,
+    currentPage,
+    itemsPerPage,
+    filtering,
+  } = useSelector((state) => state);
 
   const handlePageChange = (newPage) => {
     dispatch(setCurrentPage(newPage));
@@ -34,18 +37,16 @@ const Cards = () => {
 
   const handleOrder = (event) => {
     dispatch(orderCards(event.target.value));
-    setAux(true);
   };
 
   const handleFilterById = (event) => {
     dispatch(filterCardsById(event.target.value));
-    setAux(true);
+    handlePageChange(1);
   };
 
   const handleFilterByType = (type) => {
     dispatch(filterCardsByType(type));
     handlePageChange(1);
-    setAux(true);
   };
 
   const listAllPokemons = paginatedItems.map((pokemon) => (
@@ -74,7 +75,7 @@ const Cards = () => {
           handlePageChange={handlePageChange}
         />
         <ul className={styles.content}>
-          {!aux ? listAllPokemons : listMyPokemons}
+          {!filtering ? listAllPokemons : listMyPokemons}
         </ul>
         <Pagination
           className={styles.pagination}

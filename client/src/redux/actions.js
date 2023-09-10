@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_POKEMON, GET_TYPES, FILTER_TYPE, ORDER, FILTER_ID, SET_CURRENT_PAGE, SEARCH_BY_NAME, POKEMON_ERROR  } from "./actionTypes";
+import { GET_POKEMON, GET_TYPES, FILTER_TYPE, ORDER, FILTER_ID, SET_CURRENT_PAGE, SEARCH_BY_NAME, POKEMON_ERROR, CLEAN_FILTERS  } from "./actionTypes";
 
 const endpoints = ["pokemons", "types", "pokemons/search?charName="];
 
@@ -83,3 +83,7 @@ export const setCurrentPage = (page) => ({
   type: SET_CURRENT_PAGE,
   payload: page,
 });
+
+export const cleanFilters = () => ({
+  type: CLEAN_FILTERS,
+})

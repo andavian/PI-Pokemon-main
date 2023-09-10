@@ -7,6 +7,7 @@ import {
   SET_CURRENT_PAGE,
   SEARCH_BY_NAME,
   POKEMON_ERROR,
+  CLEAN_FILTERS,
 } from "./actionTypes";
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   myPokemons: [],
   pokemonTypes: [],
   pokemonError: null,
+  filtering: false,
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -38,6 +40,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
 
         myPokemons: action.payload,
+        filtering: true,
       };
 
     case FILTER_TYPE:
@@ -49,6 +52,7 @@ export default function rootReducer(state = initialState, action) {
           myPokemons: state.allPokemons.filter((pokemon) =>
             pokemon.types.find((type) => type.name === action.payload)
           ),
+          filtering: true,
         };
       }
 
@@ -63,6 +67,7 @@ export default function rootReducer(state = initialState, action) {
               (pokemon) =>
                 typeof pokemon.id === "string" && pokemon.id.length === 36
             ),
+            filtering: true,
           };
         case "API":
           return {
@@ -70,6 +75,7 @@ export default function rootReducer(state = initialState, action) {
             myPokemons: state.allPokemons.filter(
               (pokemon) => pokemon.id.length !== 36
             ),
+            filtering: true,
           };
         default:
           return { ...state };
@@ -120,6 +126,9 @@ export default function rootReducer(state = initialState, action) {
 
     case SET_CURRENT_PAGE:
       return { ...state, currentPage: action.payload };
+
+    case CLEAN_FILTERS:
+      return { ...state, filtering: false };
 
     case POKEMON_ERROR:
       return {

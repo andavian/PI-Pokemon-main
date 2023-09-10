@@ -3,10 +3,10 @@
 }
 
 .input {
-  min-height: 30px;
-  min-width: 125px;
-  padding: 1rem;
-  margin: 2rem;
+  min-height: 25px;
+  min-width: 75px;
+  padding: 0.5rem;
+  margin: 1rem;
   color: var(--text-100);
   font-size: 15px;
   border: 1px solid var(--accent-200);
@@ -27,11 +27,11 @@
   min-width: 125px;
   padding: 1rem;
 
-  color: var(--text-100);
+  color: var(--primary-200);
   font-size: 15px;
   border: none;
   border-radius: 0 6px 6px 0;
-  background-color: var(--bg-200);
+  background-color: var(--bg-100);
 }
 
 .text {
@@ -43,5 +43,18 @@
   color: var(--text-100);
   font-size: 15px;
   border-radius: 6px 0 0 6px;
-  background-color: var(--bg-200);
+  background-color: var(--bg-100);
+}
+
+.btn {
+  min-height: 50px;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--primary-200);
+  color: var(--text-100);
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  position: relative;
 }

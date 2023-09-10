@@ -1,7 +1,16 @@
 import TypesButtons from "../TypesButtons/TypesButtons";
 import styles from "./sideBar.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { cleanFilters } from "../../redux/actions";
 
 const SideBar = ({ handleFilterById, handleFilterByType, handleOrder }) => {
+  const dispatch = useDispatch();
+  const filtering = useSelector((state) => state.filtering);
+
+  const handleClick = () => {
+    dispatch(cleanFilters(!filtering));
+  };
+
   return (
     <>
       <section className={styles.container}>
@@ -14,6 +23,10 @@ const SideBar = ({ handleFilterById, handleFilterByType, handleOrder }) => {
             <option value="LA">Lowest Attack</option>
           </select>
         </div>
+        <hr />
+        <button onClick={handleClick} className={styles.btn}>
+          Clean Filters
+        </button>
         <hr />
         <h2>Filter by Type</h2>
 

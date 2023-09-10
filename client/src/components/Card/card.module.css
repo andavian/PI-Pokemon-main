@@ -89,8 +89,14 @@
 .card:hover .wrapper::after {
   height: 120px;
 }
-.title {
+
+.link {
   text-decoration: none;
+
+  color: transparent;
+}
+
+.title {
   color: var(--primary-300);
   width: 100%;
   background-color: rgba(44, 44, 44, 0.7);
@@ -104,6 +110,7 @@
 
 .character {
   width: 100%;
+  height: 75%;
   opacity: 0;
   transition: all 0.5s;
   position: absolute;
