@@ -37,6 +37,7 @@
   text-align: center;
   box-shadow: -1px 15px 30px -12px black;
   z-index: 9999;
+  margin-top: 3rem;
 }
 
 .cardImage {
@@ -50,6 +51,7 @@
 
 .cardImg {
   width: 350px;
+  height: 350px;
   position: absolute;
   top: -110px;
   right: -20px;

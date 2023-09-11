@@ -17,8 +17,8 @@ const SideBar = ({ handleFilterById, handleFilterByType, handleOrder }) => {
         <div className={styles.oredering}>
           <p className={styles.text}>Sort by</p>
           <select onChange={handleOrder} className={styles.order}>
-            <option value="A">Ascending</option>
-            <option value="D">Descending</option>
+            <option value="A">A-Z</option>
+            <option value="D">Z-A</option>
             <option value="HA">Highest Attack</option>
             <option value="LA">Lowest Attack</option>
           </select>

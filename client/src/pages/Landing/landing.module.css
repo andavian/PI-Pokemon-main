@@ -46,6 +46,7 @@
 }
 
 .logo {
+  width: 100vw;
   position: absolute;
   top: -50px;
 }

@@ -83,18 +83,40 @@ export default function rootReducer(state = initialState, action) {
 
     case ORDER:
       switch (action.payload) {
+        //     case "A":
+        //       return {
+        //         ...state,
+        //         allPokemons: [...state.allPokemons].sort((a, b) => a.id - b.id),
+        //         myPokemons: [...state.myPokemons].sort((a, b) => a.id - b.id),
+        //       };
+
+        //     case "D":
+        //       return {
+        //         ...state,
+        //         allPokemons: [...state.allPokemons].sort((a, b) => b.id - a.id),
+        //         myPokemons: [...state.myPokemons].sort((a, b) => b.id - a.id),
+        //       };
+
         case "A":
           return {
             ...state,
-            allPokemons: [...state.allPokemons].sort((a, b) => a.id - b.id),
-            myPokemons: [...state.myPokemons].sort((a, b) => a.id - b.id),
+            allPokemons: [...state.allPokemons].sort((a, b) =>
+              a.name.localeCompare(b.name)
+            ),
+            myPokemons: [...state.myPokemons].sort((a, b) =>
+              a.name.localeCompare(b.name)
+            ),
           };
 
         case "D":
           return {
             ...state,
-            allPokemons: [...state.allPokemons].sort((a, b) => b.id - a.id),
-            myPokemons: [...state.myPokemons].sort((a, b) => b.id - a.id),
+            allPokemons: [...state.allPokemons].sort((a, b) =>
+              b.name.localeCompare(a.name)
+            ),
+            myPokemons: [...state.myPokemons].sort((a, b) =>
+              b.name.localeCompare(a.name)
+            ),
           };
 
         case "LA":
