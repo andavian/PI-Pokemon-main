@@ -8,6 +8,7 @@ import {
   SEARCH_BY_NAME,
   POKEMON_ERROR,
   CLEAN_FILTERS,
+  CLEAR_ERROR,
 } from "./actionTypes";
 
 const initialState = {
@@ -156,6 +157,12 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         pokemonError: action.payload, // Almacena el mensaje de error
+      };
+
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        error: null,
       };
 
     default:

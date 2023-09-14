@@ -46,12 +46,13 @@
 }
 
 .logo {
-  width: 100vw;
+  min-width: 25%;
+  height: 50%;
   position: absolute;
-  top: -50px;
+  top: -40px;
 }
 
 .text {
   position: absolute;
-  bottom: 15px;
+  bottom: 8%;
 }

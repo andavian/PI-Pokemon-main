@@ -1,5 +1,16 @@
 import axios from "axios";
-import { GET_POKEMON, GET_TYPES, FILTER_TYPE, ORDER, FILTER_ID, SET_CURRENT_PAGE, SEARCH_BY_NAME, POKEMON_ERROR, CLEAN_FILTERS  } from "./actionTypes";
+
+import {
+  GET_POKEMON,
+  GET_TYPES,
+  FILTER_TYPE,
+  ORDER,
+  FILTER_ID,
+  SET_CURRENT_PAGE,
+  SEARCH_BY_NAME,
+  CLEAN_FILTERS,
+  CLEAR_ERROR,
+} from "./actionTypes";
 
 const endpoints = ["pokemons", "types", "pokemons/search?charName="];
 
@@ -13,10 +24,16 @@ export const getPokemons = () => {
         payload: data,
       });
     } catch (error) {
-      dispatch({
-        type: POKEMON_ERROR,
-        payload: error.message,
-      });
+      console.error("error", error);
+      error.response
+        ? alert(error.response.data)
+        : alert(
+            "El servidor no está disponible en este momento. Inténtalo más tarde."
+          );
+      // dispatch({
+      //   type: POKEMON_ERROR,
+      //   payload: error.response.data.message,
+      // });
     }
   };
 };
@@ -30,10 +47,16 @@ export const getTypes = () => {
         payload: data,
       });
     } catch (error) {
-      dispatch({
-        type: POKEMON_ERROR,
-        payload: error.message,
-      });
+      error.response
+        ? alert(error.response.data)
+        : alert(
+            "El servidor no está disponible en este momento. Inténtalo más tarde."
+            //     );
+            // dispatch({
+            //   type: POKEMON_ERROR,
+            //   payload: error.response.data.message,
+            // });
+          );
     }
   };
 };
@@ -50,10 +73,15 @@ export function searchPokemonByName(charName) {
         payload: data,
       });
     } catch (error) {
-      dispatch({
-        type: POKEMON_ERROR,
-        payload: error.message,
-      });
+      error.response
+        ? alert(error.response.data)
+        : alert(
+            "El servidor no está disponible en este momento. Inténtalo más tarde."
+          );
+      // dispatch({
+      //   type: POKEMON_ERROR,
+      //   payload: error.response.data.message,
+      // });
     }
   };
 }
@@ -86,4 +114,8 @@ export const setCurrentPage = (page) => ({
 
 export const cleanFilters = () => ({
   type: CLEAN_FILTERS,
-})
+});
+
+export const clearError = () => ({
+  type: CLEAR_ERROR,
+});

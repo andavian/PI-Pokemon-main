@@ -28,11 +28,11 @@ const SideBar = ({ handleFilterById, handleFilterByType, handleOrder }) => {
           Clean Filters
         </button>
         <hr />
-        <h2>Filter by Type</h2>
+        <h2 className={styles.title}>Filter by Type</h2>
 
         <TypesButtons onClick={handleFilterByType} />
         <hr />
-        <h2>Filter by Origin</h2>
+        <h2 className={styles.title}>Filter by Origin</h2>
         <select onChange={handleFilterById} className={styles.input}>
           <option value="All">All</option>
           <option value="Database">Database</option>

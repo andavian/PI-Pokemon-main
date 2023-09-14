@@ -7,3 +7,4 @@ export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const CLEAN_FILTERS = "CLEAN_FILTERS";
 export const POKEMON_ERROR = "POKEMON_ERROR";
+export const CLEAR_ERROR = "CLEAR_ERROR";
