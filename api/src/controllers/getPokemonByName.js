@@ -2,54 +2,43 @@ const axios = require("axios");
 const { Op } = require("sequelize");
 const { Pokemon, Type } = require("../db");
 
-const URL_BASE = "https://pokeapi.co/api/v2/pokemon/";
+const URL_BASE = "https://pokeapi.co/api/v2/pokemon?limit=649";
+
+const pokeData = (poke) => {
+  return {
+    id: poke.data.id,
+    name:
+      poke.data.name.charAt(0).toUpperCase() +
+      poke.data.name.slice(1).toLowerCase(),
+    image: poke.data.sprites.other.home.front_default,
+    image2: poke.data.sprites.other.dream_world.front_default,
+    hp: poke.data.stats[0].base_stat,
+    attack: poke.data.stats[1].base_stat,
+    defense: poke.data.stats[2].base_stat,
+    speed: poke.data.stats[5].base_stat,
+    height: poke.data.height,
+    weight: poke.data.weiht,
+    types: poke.data.types.map((types) => types.type.name),
+  };
+};
 
 const getPokemonByName = async (req, res) => {
   const charName = req.query.charName;
 
-  const apiPokemons = 100; //649;
-  const pokemons = [];
-
   try {
-    const fetchPokemon = async (id) => {
-      const response = await axios.get(`${URL_BASE}${id}`);
+    const apiPokemons = (await axios.get(URL_BASE)).data.results;
 
-      return response.data;
-    };
-
-    const promises = [];
-    for (let id = 1; id <= apiPokemons; id++) {
-      promises.push(fetchPokemon(id));
-    }
-
-    const pagesData = await Promise.all(promises);
-    pagesData.forEach((pageData) => {
-      pokemons.push(pageData);
-    });
-
-    const mapPokemons = pokemons.map((pokemon) => {
-      const { id, name, sprites, stats, height, weight, types } = pokemon;
-      return {
-        id,
-        name,
-        image: sprites.other.home.front_default,
-        image2: sprites.other.dream_world.front_default,
-        hp: stats[0].base_stat,
-        attack: stats[1].base_stat,
-        defense: stats[2].base_stat,
-        speed: stats[5].base_stat,
-        height,
-        weight,
-        types: types.map((item) => {
-          const { name } = item.type;
-          return { name };
-        }),
-      };
-    });
-
-    const nameFinding = mapPokemons.filter((character) =>
-      character.name.toLowerCase().includes(charName.toLowerCase())
+    const nameFinding = await Promise.all(
+      apiPokemons
+        .filter((pokemon) =>
+          pokemon.name.toLowerCase().includes(charName.toLowerCase())
+        )
+        .map(async (element) => {
+          const response = await axios.get(element.url);
+          return pokeData(response);
+        })
     );
+
     //peticion a la base de datos
     const pokemonDB = await Pokemon.findAll({
       where: {

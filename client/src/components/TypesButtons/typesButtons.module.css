@@ -1,3 +1,16 @@
+:root {
+  --primary-100: #ff0000;
+  --primary-200: #ff5a36;
+  --primary-300: #ffc993;
+  --accent-100: #ffffff;
+  --accent-200: #9b9b9b;
+  --text-100: #ffffff;
+  --text-200: #e0e0e0;
+  --bg-100: #000000;
+  --bg-200: #161616;
+  --bg-300: #2c2c2c;
+}
+
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 45px), 1fr));
@@ -10,4 +23,15 @@
   padding: 5px;
   background-color: transparent;
   cursor: pointer;
+}
+
+.item:hover {
+  box-shadow: inset 0px 0px 5px 5px var(--primary-200);
+  border-radius: 6px;
+}
+
+.active {
+  background-color: var(--primary-300);
+  outline: none;
+  border-radius: 8px;
 }

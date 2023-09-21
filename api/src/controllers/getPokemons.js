@@ -1,48 +1,52 @@
 const axios = require("axios");
 const { Pokemon, Type } = require("../db");
+//const fetchAllPokemons = require("./fetchAllPokemons");
 
-const URL_BASE = "https://pokeapi.co/api/v2/pokemon/";
+const URL_BASE = "https://pokeapi.co/api/v2/pokemon?limit=649";
+
+const pokeData = (poke) => {
+  return {
+    id: poke.data.id,
+    name:
+      poke.data.name.charAt(0).toUpperCase() +
+      poke.data.name.slice(1).toLowerCase(),
+    image: poke.data.sprites.other.home.front_default,
+    image2: poke.data.sprites.other.dream_world.front_default,
+    hp: poke.data.stats[0].base_stat,
+    attack: poke.data.stats[1].base_stat,
+    defense: poke.data.stats[2].base_stat,
+    speed: poke.data.stats[5].base_stat,
+    height: poke.data.height,
+    weight: poke.data.weiht,
+    types: poke.data.types.map((types) => {
+      const name = types.type.name;
+      return { name };
+    }),
+  };
+};
 
 const getPokemons = async (req, res) => {
-  const apiPokemons = 120; //640
-  const pokemons = [];
-
   try {
-    const fetchPokemon = async (id) => {
-      const response = await axios.get(`${URL_BASE}${id}`);
+    const limit = 50; // Obtener 50 Pokémon por solicitud
+    const offset = 0; // Comenzar desde el primer Pokémon
+    const apiPokemons = [];
 
-      return response.data;
-    };
+    while (apiPokemons.length < 649) {
+      const response = await axios.get(
+        `${URL_BASE}&offset=${offset}&limit=${limit}`
+      );
+      const results = response.data.results;
 
-    const promises = [];
-    for (let id = 1; id <= apiPokemons; id++) {
-      promises.push(fetchPokemon(id));
+      const apiPokemonsUrl = await Promise.all(
+        results.map(async (element) => {
+          const response = await axios.get(element.url);
+          return pokeData(response);
+        })
+      );
+
+      apiPokemons.push(...apiPokemonsUrl);
+      offset += limit; // Avanzar al siguiente lote de Pokémon
     }
-
-    const pagesData = await Promise.all(promises);
-    pagesData.forEach((pageData) => {
-      pokemons.push(pageData);
-    });
-
-    const mapPokemons = pokemons.map((pokemon) => {
-      const { id, name, sprites, stats, height, weight, types } = pokemon;
-      return {
-        id,
-        name,
-        image: sprites.other.home.front_default,
-        image2: sprites.other.dream_world.front_default,
-        hp: stats[0].base_stat,
-        attack: stats[1].base_stat,
-        defense: stats[2].base_stat,
-        speed: stats[5].base_stat,
-        height,
-        weight,
-        types: types.map((item) => {
-          const { name } = item.type;
-          return { name };
-        }),
-      };
-    });
 
     const pokemonsDB = await Pokemon.findAll({
       include: {
@@ -52,9 +56,9 @@ const getPokemons = async (req, res) => {
           attributes: [],
         },
       },
-    }); //peticion a la base de datos
+    });
 
-    const totalPokemons = pokemonsDB.concat(mapPokemons);
+    const totalPokemons = pokemonsDB.concat(apiPokemonsUrl);
 
     if (totalPokemons.length === 0) {
       return res.status(400).send("No se encontraron pokemons");

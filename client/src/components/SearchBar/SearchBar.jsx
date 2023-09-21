@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { searchPokemonByName } from "../../redux/actions";
+import { searchPokemonByName, setCurrentPage } from "../../redux/actions";
 import styles from "./searchbar.module.css";
 
 export default function SearchBar() {
   const dispatch = useDispatch();
+
   const [name, setName] = useState("");
 
   const handleChange = (event) => {
     setName(event.target.value);
   };
 
-  const handleSearch = (name) => {
-    dispatch(searchPokemonByName(name));
+  const handleSearch = async (name) => {
+    await dispatch(searchPokemonByName(name));
+    dispatch(setCurrentPage(1));
   };
 
   return (

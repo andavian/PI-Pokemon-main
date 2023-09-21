@@ -10,6 +10,9 @@ import {
   SEARCH_BY_NAME,
   CLEAN_FILTERS,
   CLEAR_ERROR,
+  CREATE_POKEMON,
+  DELETE_POKEMON,
+  UPDATE_POKEMON_BY_NAME,
 } from "./actionTypes";
 
 const endpoints = ["pokemons", "types", "pokemons/search?charName="];
@@ -115,6 +118,25 @@ export const setCurrentPage = (page) => ({
 export const cleanFilters = () => ({
   type: CLEAN_FILTERS,
 });
+
+export const createPokemon = (newPokemon) => ({
+  type: CREATE_POKEMON,
+  payload: newPokemon,
+});
+
+export const updatePokemonByName = (name, updatedData) => {
+  return {
+    type: UPDATE_POKEMON_BY_NAME,
+    payload: { name, updatedData },
+  };
+};
+
+export const deletePokemonAction = (pokemonName) => {
+  return {
+    type: DELETE_POKEMON,
+    payload: pokemonName,
+  };
+};
 
 export const clearError = () => ({
   type: CLEAR_ERROR,

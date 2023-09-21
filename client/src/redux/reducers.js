@@ -9,6 +9,9 @@ import {
   POKEMON_ERROR,
   CLEAN_FILTERS,
   CLEAR_ERROR,
+  CREATE_POKEMON,
+  UPDATE_POKEMON_BY_NAME,
+  DELETE_POKEMON,
 } from "./actionTypes";
 
 const initialState = {
@@ -152,6 +155,34 @@ export default function rootReducer(state = initialState, action) {
 
     case CLEAN_FILTERS:
       return { ...state, filtering: false };
+
+    case CREATE_POKEMON:
+      return {
+        ...state,
+        allPokemons: [...state.allPokemons, action.payload],
+      };
+
+    case UPDATE_POKEMON_BY_NAME:
+      const { name, updatedData } = action.payload;
+      const updatedAllPokemons = state.allPokemons.map((pokemon) => {
+        if (pokemon.name === name) {
+          return { ...pokemon, ...updatedData };
+        }
+        return pokemon;
+      });
+      return {
+        ...state,
+        myPokemons: updatedAllPokemons,
+      };
+
+    case DELETE_POKEMON:
+      const filterAllPokemons = state.allPokemons.filter(
+        (pokemon) => pokemon.name !== action.payload
+      );
+      return {
+        ...state,
+        allPokemons: filterAllPokemons,
+      };
 
     case POKEMON_ERROR:
       return {

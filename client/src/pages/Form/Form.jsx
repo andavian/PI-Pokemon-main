@@ -1,11 +1,17 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import validateForm from "./validation.js";
 import styles from "./form.module.css";
 import TypesButtons from "../../components/TypesButtons/TypesButtons.jsx";
+import {
+  createPokemon,
+  deletePokemonAction,
+  updatePokemonByName,
+} from "../../redux/actions.js";
 
 const Form = () => {
+  const dispatch = useDispatch();
   const pokemonTypes = useSelector((state) => state.pokemonTypes);
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [pokemonData, setPokemonData] = useState({
@@ -27,10 +33,13 @@ const Form = () => {
     const { name, value } = event.target;
     setPokemonData((prevData) => ({ ...prevData, [name]: value }));
     setErrors(
-      validateForm({
-        ...pokemonData,
-        [name]: value,
-      })
+      validateForm(
+        {
+          ...pokemonData,
+          [name]: value,
+        },
+        selectedTypes
+      )
     );
   };
 
@@ -70,6 +79,7 @@ const Form = () => {
     try {
       const URL = "pokemons";
       await axios.post(URL, pokemonData);
+      dispatch(createPokemon(pokemonData));
       alert("pokemon successfully created");
     } catch (error) {
       console.error(error);
@@ -82,6 +92,7 @@ const Form = () => {
     try {
       const URL = `pokemons/${pokemonData.name}`;
       await axios.put(URL, pokemonData);
+      dispatch(updatePokemonByName);
       alert("pokemon successfully updated");
     } catch (error) {
       console.error(error);
@@ -94,6 +105,7 @@ const Form = () => {
     try {
       const URL = `pokemons/delete?name=${pokemonData.name}`;
       await axios.delete(URL);
+      dispatch(deletePokemonAction);
       alert("pokemon successfully deleted");
     } catch (error) {
       console.error(error);

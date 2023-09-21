@@ -1,4 +1,4 @@
-export default function validateForm(pokemonData) {
+export default function validateForm(pokemonData, selectedTypes) {
   const errors = {};
 
   // Validación de nombre
@@ -70,9 +70,12 @@ export default function validateForm(pokemonData) {
   }
 
   // Validación de selección de tipos
-  if (pokemonData.types.length > 2) {
-    errors.types = "Solo se pueden seleccionar hasta dos tipos.";
-  }
+  // if (selectedTypes.length === 0) {
+  //   errors.types = "Al menos un tipo es requerido";
+  // }
+  // if (selectedTypes.length > 2) {
+  //   errors.types = "Solo se pueden seleccionar hasta dos tipos.";
+  // }
 
   return errors;
 }
