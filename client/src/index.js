@@ -8,8 +8,8 @@ import store from "./redux/store";
 import { Provider } from "react-redux";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:3001/";
-//axios.defaults.baseURL = "https://serverpokedex.onrender.com/";
+//axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "https://serverpokedex.onrender.com/";
 
 ReactDOM.render(
   <BrowserRouter>
